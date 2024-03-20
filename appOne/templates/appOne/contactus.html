@@ -1,0 +1,29 @@
+
+
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+  <body>
+    <h1>Contact Us</h1>
+
+    <h3>People work for us:</h3>
+
+    <div class="">
+      {% for item in testdata%}
+      <h5>{{item.name}}</h5>
+
+    </div>
+
+
+
+
+    {%endfor%}
+
+
+
+
+  </body>
+
+{% endblock content %}

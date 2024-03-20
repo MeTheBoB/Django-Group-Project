@@ -1,0 +1,20 @@
+
+
+
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+<div>
+
+    <h1>Home page</h1>
+
+    {{insert_me}}
+    <img src="{% static 'django.jpg'%}" alt="">
+
+</div>
+
+
+
+{% endblock content%}
