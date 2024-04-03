@@ -1,0 +1,32 @@
+
+
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+  <body>
+    <h1>Contact Us</h1>
+
+    <h3>People work for us:</h3>
+
+    <div class="">
+      {% for item in item %}
+
+
+
+      <h5> <a href="{% url 'homepage' item.id %}">{{item.id}}</a> {{item.name}} {{item.itemmaker}} {{item.itemmaker.address}}</h5>
+
+    </div>
+
+
+
+
+    {%endfor%}
+
+
+
+
+  </body>
+
+{% endblock content %}
