@@ -1,0 +1,74 @@
+<!-- equipment_list.html -->
+
+{% extends "main.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% include 'navbar.html'%}
+
+<link rel="stylesheet" href="{%  static 'css/equipmentList.css'%}">
+
+
+
+<div class="table_with_equipment">
+
+
+  <div class="form_">
+
+
+    <form method="get" action="{% url 'equipment_list' %}">
+        {{ filter_form.as_p }}
+        <button type="submit">Search</button>
+        {% if user.is_staff %}
+        <a href="{% url 'equipment_add' %}" class="btn">Add Equipment</a>
+        {% endif %}
+    </form>
+  </div>
+
+  <table>
+      <tr>
+          <th>Equipment ID</th>
+          <th>Type of Device</th>
+          <th>Image</th>
+          <th>Device Name</th>
+          <th>Location</th>
+          <th>Comments</th>
+          <th>Onsite</th>
+          <th>Availability</th>
+      </tr>
+      <!-- Loop through the equipments queryset -->
+      {% for equipment in equipments %}
+      <tr>
+          <td>{{ equipment.equipment_id }}</td>
+          <td>{{ equipment.type_of_device }}</td>
+          <td>
+              <!-- Make sure you have set up MEDIA_URL correctly to serve media files -->
+              <img src="{{ equipment.image.url }}" alt="Equipment Image" style="width:50px;height:50px;">
+          </td>
+          <td>{{ equipment.device_name }}</td>
+          <td>{{ equipment.location }}</td>
+          <td>{{ equipment.comments }}</td>
+          <td>{{ equipment.onsite }}</td>
+          <td>{{ equipment.availability }}</td>
+
+          {% if user.is_staff %}
+          <td>
+
+            <button type="button" name="button"><a href="{% url 'equipment_edit' equipment_id=equipment.equipment_id %}">Edit</a></button>
+
+          </td>
+    {% endif %}
+      </tr>
+      {% empty %}
+          <tr>
+              <td colspan="8">No equipment found.</td>
+          </tr>
+      {% endfor %}
+  </table>
+
+</div>
+
+
+{% endblock content %}

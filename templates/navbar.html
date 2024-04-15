@@ -1,22 +1,42 @@
 <!DOCTYPE html>
+
+{% load static %}
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-
-
-
-
-
-
-
-
+    <link rel="stylesheet" href="{%  static 'css/navbar.css'%}">
 
 </head>
 <body>
 
-    <h1>Logo</h1>
+  <body>
+
+    <nav class="navbar">
+          <div class="nav-container">
+              <div class="nav-logo">
+                  <!-- Ensure you have the logo in your static files -->
+              </div>
+              <div class="nav-items">
+                  <a href="{% url 'homepage' %}">Home</a>
+                  <a href="{% url 'equipment_list' %}">Equipment List</a>
+                      {% if user.is_staff %}
+                          <a href="">Management</a>
+                          <a href="">Reports</a>
+                          <a href="" class="btn">Log Out</a>
+                      {% else %}
+                          <a href="{% url 'contact_us' %}">Contact Us</a>
+                          <a href="">Help</a>
+                          <a href="">About Us</a>
+                          <a href="">Cart</a>
+                          <a href="" class="btn">Log Out</a>
+                      {% endif %}
+              </div>
+          </div>
+      </nav>
+
 
 
 

@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+{% block content %}
+{% load static %}
+
+{% include 'navbar.html' %}
+
+<link rel="stylesheet" href="{%  static 'css/equipment_form.css' %}">
+
+<div class="equipment-form-container">
+    <h2 class="form-title">Edit equipment</h2>
+    <form method="post" enctype="multipart/form-data" class="equipment-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-buttons">
+        <button type="submit" class="submit-btn">Submit</button>
+        <button type="delete" class="delete-btn">Delete</button>
+        <button type="reset" class="reset-btn">Reset</button>
+      </div>
+    </form>
+
+
+    
+</div>
+
+{% endblock content %}

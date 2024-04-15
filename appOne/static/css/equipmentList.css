@@ -1,0 +1,37 @@
+
+.table_with_equipment {
+    margin-top: 30px;
+    padding: 0 60px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+
+}
+
+th {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+tr:nth-child(even) {background-color: #f9f9f9;}
+
+img {
+    width: 50px;
+    height: auto;
+}
+
+form {
+    margin-bottom: 20px;
+}
+.form_ {
+    margin-top: 100px;
+}
