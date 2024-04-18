@@ -1,41 +1,27 @@
-
 {% extends 'main.html' %}
 
 {% block content %}
 {% load static %}
-  <head>
-    <meta charset="utf-8">
-    <title>Welcome</title>
+<head>
+  <meta charset="utf-8">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="{% static 'css/welcomepagecss.css' %}">
+</head>
 
-      <link rel="stylesheet" href="{%  static 'css/welcomepagecss.css'%}">
-  </head>
-
-
-
-  <body>
-
-
-    <div class="welcomepage-container">
-
-      <img src="" alt="">
-      <div class="welcomepage-image">
-        <img src="{% static "images/wlcSchoolInv.png" %}" alt="welcome to school inventory" width="500" height="600">
-      </div>
-
-      <div class="welcomepage-buttons">
-        <button class="button2" type="button" name="button">User</button>
-        <button class="button2" type="button" name="button">Admin</button>
-
-        <p>Do you need any help?</p>
-        <p>contact  <a href="{% url 'contact_us' %}">Us</a></p>
-      </div>
+<body>
+  <div class="welcomepage-container">
+    <div class="welcomepage-image">
+      <img src="{% static 'images/wlcSchoolInv.png' %}" alt="Welcome to School Inventory" width="500" height="600">
     </div>
 
+    <div class="welcomepage-buttons">
+      <a href="{% url 'login' %}" class="button2">Login</a> <!-- Assuming 'login' is the URL name for your login view -->
+      <a href="{% url 'adminLogin' %}" class="button2">Admin</a> <!-- Adjust accordingly if you have a specific admin login or dashboard -->
 
-
-
-
-  </body>
-
-
-  {% endblock content%}
+      <p>Don't have an account (user)? <a href="{% url 'signup' %}">click here</a></p>
+      <p>Do you need any help?</p>
+      <p>Contact <a href="{% url 'contact_us' %}">Us</a></p>
+    </div>
+  </div>
+</body>
+{% endblock %}

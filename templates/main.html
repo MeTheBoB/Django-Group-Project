@@ -23,6 +23,12 @@
 {# Here every page will have their unique materials #}
     {% block content %}
 
+    {% if messages %}
+    {% for message in messages %}
+        <p><strong>{{ message.tag }}</strong> {{ message }}</p>
+    {% endfor %}
+{% endif %}
+
 
 
 

@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-box">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log in</button>
+        </form>
+        {% if form.non_field_errors %}
+            <p>{{ form.non_field_errors }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
