@@ -1,0 +1,32 @@
+/* top-panel.css */
+
+.top-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F5F5F5; /* Adjust the color to match the design */
+    padding: 10px 20px;
+  }
+  
+  .top-panel .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .top-panel .logo img {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
+  
+  .top-panel .account-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .top-panel .account-info .my-account {
+    margin-right: 20px; /* Space between My Account and Cart */
+  }
+  
+  .top-panel .account-info .cart {
+    /* Styles for cart icon */
+  }
+  

@@ -5,7 +5,52 @@ from .forms import EquipmentFilterForm
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from .forms import*
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
+def equipmentList(request):
+    # ... existing logic ...
+    is_admin = request.user.is_staff
+    context = {
+        'equipments': equipments,
+        'is_admin': is_admin,  # Add this line to pass to the template
+        # ... any other context data ...
+    }
+    return render(request, 'appOne/equipmentList.html', context)
+
+def reports_view(request):
+    # Your view logic here
+    return render(request, 'appOne/reports.html')
+
+def manage_booking_view(request):
+    # Your view logic here
+    return render(request, 'appOne/manage_booking.html')
+
+def help_view(request):
+    # Your logic for the help view
+    return render(request, 'appOne/help.html')
+
+def contact_us_view(request):
+    # Your logic for the contact us view
+    return render(request, 'appOne/contact_us.html')
+
+def contact_view(request):
+    # Logic for contact page goes here if needed
+    return render(request, 'contact.html', {})
+
+def homePage(request):
+    # Your code to handle the request
+    return render(request, 'appOne/home.html', context)
+
+
+def management_view(request):
+    # Your logic here
+    return render(request, 'appOne/management.html')
+
+def about_view(request):
+    # Your about page logic
+    return render(request, 'about.html')
 
 def welcomePage(request):
     return render(request, "appOne/welcomePage.html")
@@ -35,11 +80,12 @@ def equipmentList(request):
         if type_of_device:
             equipments = equipments.filter(type_of_device__icontains=type_of_device)
 
+    is_admin = request.user.is_staff
     context = {
         'equipments': equipments,
         'filter_form': filter_form,
+        'is_admin': is_admin,  
     }
-
     return render(request, 'appOne/equipmentList.html', context)
 
 
@@ -71,3 +117,27 @@ def equipment_edit(request, equipment_id):
         form = EquipmentForm(instance=equipment)
 
     return render(request, 'appOne/equipment_form.html', {'form': form})
+
+
+def user_login(request):
+    # Add your user login logic here.
+    # If the user is already logged in, redirect them to their dashboard, otherwise to the login page
+    if request.user.is_authenticated:
+        return redirect('user_home')
+    else:
+        # If it's a POST request, you would handle the login form submission here
+        if request.method == 'POST':
+            # Perform form validation, authentication, etc.
+            pass
+        return render(request, 'user_login.html', {})
+
+def admin_login(request):
+    # Similar logic for admin login
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('admin_home')
+    else:
+        # If it's a POST request, handle the login form submission here
+        if request.method == 'POST':
+            # Perform form validation, authentication, etc.
+            pass
+        return render(request, 'admin_login.html', {})
