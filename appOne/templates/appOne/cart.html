@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+{% block content %}
+{% load static %}
+
+{% include 'navbar.html'%}
+
+<div class="cart-container">
+    <h1>My Cart</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Purpose</th>
+                <th>location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.equipment.id }}</td>
+                <td>{{ item.equipment.device_name }}</td>
+                <td>{{ item.details.start_date }}</td>
+                <td>{{ item.details.end_date }}</td>
+                <td>{{ item.equipment.location }}</td>
+                <td>
+                    <form method="post" action="{% url 'remove_from_cart' item.equipment.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Remove" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Your cart is empty.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if cart_items %}
+    <div class="text-right">
+        <form method="post" action="{% url 'place_booking' %}">
+            {% csrf_token %}
+            <input type="submit" value="Place Booking" class="btn btn-primary">
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock content %}
