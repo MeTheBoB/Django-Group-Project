@@ -1,0 +1,77 @@
+<!-- equipment_list.html -->
+
+{% extends "main.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% include 'navbar.html'%}
+{% include 'sidebar.html'%}
+
+<link rel="stylesheet" href="{%  static 'css/equipmentList.css'%}">
+
+
+
+<div class="table_with_equipment">
+    <div class="form_">
+        <!-- Search Form -->
+        <form method="get" action="{% url 'equipment_list' %}">
+            {% csrf_token %}
+            <div class="field-container">
+                {{ filter_form.equipment_id.label_tag }}
+                {{ filter_form.equipment_id }}
+            </div>
+            <div class="field-container">
+                {{ filter_form.type_of_device.label_tag }}
+                {{ filter_form.type_of_device }}
+            </div>
+            <button type="submit" class="btn">Search</button>
+            {% if user.is_staff %}
+            <a href="{% url 'equipment_add' %}" class="btn">Add Equipment</a>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Equipment Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Equipment ID</th>
+                <th>Type of Device</th>
+                <th>Image</th>
+                <th>Device Name</th>
+                <th>Location</th>
+                <th>Comments</th>
+                <th>Onsite</th>
+                <th>Availability</th>
+                {% if user.is_staff %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipment in equipments %}
+            <tr>
+                <td>{{ equipment.id }}</td>
+                <td>{{ equipment.type_of_device }}</td>
+                <td><img src="{{ equipment.image.url }}" alt="Equipment Image" style="width:50px;height:50px;"></td>
+                <td>{{ equipment.device_name }}</td>
+                <td>{{ equipment.location }}</td>
+                <td>{{ equipment.comments }}</td>
+                <td>{{ equipment.onsite }}</td>
+                <td>{{ equipment.availability }}</td>
+                <td><a href="{% url 'equipment_detail' pk=equipment.id %}" class="btn detail-btn">Details</a></td>
+                {% if user.is_staff %}
+                <td><a href="{% url 'equipment_edit' equipment_id=equipment.id %}">Edit</a></td>
+                {% endif %}
+            </tr>
+            {% empty %}
+            <tr><td colspan="9">No equipment found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}
