@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+
+  <body>
+    <h2>Register</h2>
+    <form method="post" action="{% url 'register' %}">  <!-- Adjust the action URL as necessary -->
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Sign up</button>
+    </form>
+    <small>Already have an account? <a href="{% url 'login' %}">Log in</a></small>
+
+{% endblock content %}
