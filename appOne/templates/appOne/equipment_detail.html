@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% include 'navbar.html'%}
+{% include 'sidebar.html'%}
+
+<div class="equipment-detail-container">
+    <h1>{{ equipment.device_name }}</h1>
+    <img src="{{ equipment.image.url }}" alt="{{ equipment.device_name }}" style="width: 300px;">
+    <p><strong>ID:</strong> {{ equipment.id }}</p>
+    <p><strong>Type:</strong> {{ equipment.type_of_device }}</p>
+    <p><strong>Location:</strong> {{ equipment.location }}</p>
+    <p><strong>Availability:</strong> {{ equipment.availability }}</p>
+
+    {% if not request.user.is_staff %}
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.booking_start_date.label_tag }}
+            {{ form.booking_start_date }}
+            {% for error in form.booking_start_date.errors %}
+                <div class="error" style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.booking_end_date.label_tag }}
+            {{ form.booking_end_date }}
+            {% for error in form.booking_end_date.errors %}
+                <div class="error" style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.purpose.label_tag }}
+            {{ form.purpose }}
+            {% for error in form.purpose.errors %}
+                <div class="error" style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <button type="submit" name="add_to_cart" class="btn btn-info">Add to Cart</button>
+        <button type="submit" name="direct_book" class="btn btn-success">Book Now</button>
+    </form>
+    {% endif %}
+</div>
+
+{% endblock content %}
