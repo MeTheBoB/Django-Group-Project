@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+<body>
+
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="hidden" name="next" value="{% url 'homepage' %}">
+      <button type="submit">Login</button>
+  </form>
+
+  </body>
+
+{% endblock content %}
