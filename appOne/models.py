@@ -9,6 +9,11 @@ from django.utils import timezone
 # Mahathir Saad Islam, w1907417
 
 class Person(models.Model):
+    """
+    Represents a person, extending the default User model with additional personal information.
+    This class links directly to a User instance and stores personal details.
+    """
+
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
@@ -21,6 +26,10 @@ class Person(models.Model):
         return f"{self.name} {self.surname}"
 
 class Equipment(models.Model):
+    """
+    Represents a piece of equipment that can be reserved by users.
+    Includes details such as type, location, availability, and more.
+    """
     id = models.AutoField(primary_key=True)
     type_of_device = models.CharField(max_length=255)
     image = models.ImageField(upload_to='appOne/images/')
@@ -37,6 +46,10 @@ class Equipment(models.Model):
         return f"Equipment {self.id}"
 
 class Reservation(models.Model):
+     """
+    Represents a reservation made by a user for a piece of equipment.
+    It links a User with the Equipment they intend to reserve, along with dates and status.
+    """
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reservations',blank=True, null=True)
     booking_start_date = models.DateTimeField()
@@ -50,6 +63,10 @@ class Reservation(models.Model):
 
 
 class Cart(models.Model):
+    """
+    Represents a shopping cart for a user, holding temporary selections of equipment before final reservation.
+    It maintains a relationship between the User and multiple pieces of Equipment.
+    """
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts')
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='cart_items')
