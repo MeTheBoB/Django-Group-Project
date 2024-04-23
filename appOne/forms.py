@@ -53,6 +53,12 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'name', 'surname', 'date_of_birth', 'phone_number']
 
+    def clean_date_of_birth(self):
+        dob = self.cleaned_data['date_of_birth']
+        if dob >= date.today():
+            raise ValidationError("The date of birth cannot be in the future or this year.")
+        return dob
+        
     def save(self, commit=True):
         user = super(SignUpForm, self).save(commit=False)
         user.first_name = self.cleaned_data['name']
