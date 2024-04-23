@@ -141,6 +141,8 @@ def register(request):
             user = form.save()
             messages.success(request, f'Account created for {user.username}!')
             return redirect('login')
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
         form = SignUpForm()
     return render(request, 'user/register.html', {'form': form})
