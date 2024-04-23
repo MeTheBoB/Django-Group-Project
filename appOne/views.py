@@ -40,7 +40,7 @@ def contactUsPage(request):
 
 #Equipment handling
 # View to display a list of equipment, with filtering options
-# Created by saad and html Johan
+# Created by saad and html by Johan
 @login_required
 def equipmentList(request):
     form = EquipmentFilterForm(request.GET or None)
