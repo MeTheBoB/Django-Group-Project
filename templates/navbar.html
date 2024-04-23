@@ -23,7 +23,7 @@
                   <a href="{% url 'homepage' %}">Home</a>
                   <a href="{% url 'equipment_list' %}">Equipment List</a>
                       {% if user.is_staff %}
-                          <a href="{% url 'admin_dashboard' %}">Management</a>
+                          <a href="{% url 'admin_home' %}">Management</a>
                           <a href="">Reports</a>
                           <a href="" class="btn">Log Out</a>
                       {% else %}

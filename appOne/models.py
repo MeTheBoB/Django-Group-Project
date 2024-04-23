@@ -46,18 +46,19 @@ class Equipment(models.Model):
         return f"Equipment {self.id}"
 
 class Reservation(models.Model):
-     """
+    """
     Represents a reservation made by a user for a piece of equipment.
     It links a User with the Equipment they intend to reserve, along with dates and status.
     """
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reservations',blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reservations', blank=True, null=True)
     booking_start_date = models.DateTimeField()
     booking_end_date = models.DateTimeField()
     alerts = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=255, choices=[('approved', 'Approved'), ('rejected', 'Rejected')],blank=True, null=True)
+    status = models.CharField(max_length=255, choices=[('approved', 'Approved'), ('rejected', 'Rejected')], blank=True, null=True)
     purpose = models.TextField()
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='reservations', blank=True, null=True)
+
     def __str__(self):
         return f"Reservation {self.id}"
 

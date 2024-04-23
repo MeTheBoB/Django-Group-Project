@@ -364,3 +364,27 @@ def authorize_reservations(request):
         return redirect('authorize_reservations')
     return render(request, 'appOne/authorize_reservations.html', {'reservations': pending_reservations})
 
+#created by Johan
+def admin_home(request):
+    return render(request, 'admin_home.html')
+
+
+def user_home(request):
+    return render(request, 'user_home.html')
+
+
+def management_view(request):
+    return render(request, 'appOne/management.html')
+
+def reports_view(request):
+    return render(request, 'appOne/reports.html')
+
+def manage_booking_view(request):
+    return render(request, 'appOne/manage_booking.html')
+
+def about_view(request):
+    return render(request, 'about.html')
+
+def equipment_list(request):
+    equipment_list = Equipment.objects.all()
+    return render(request, 'appOne/equipment_list.html', {'equipment_list': equipment_list})

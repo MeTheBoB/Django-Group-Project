@@ -1,0 +1,25 @@
+<!-- templates/admin_home.html -->
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+{% include 'navbar.html' %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div class="admin-home-content">
+    <div class="admin-home-header">
+        <h1>ADMIN HOME PAGE</h1>
+        <a href="{% url 'logout' %}" class="logout-button">Log out</a>
+    </div>
+    <div class="admin-home-options">
+        <a href="{% url 'my_account' %}" class="admin-option">MY ACCOUNT PAGE</a>
+        <a href="{% url 'equipment_list' %}" class="admin-option">EQUIPMENT'S LISTS PAGE</a>
+        <a href="{% url 'management' %}" class="admin-option">MANAGEMENT PAGE</a>
+        <a href="{% url 'reports' %}" class="admin-option">REPORT PAGE</a>
+        <a href="{% url 'manage_bookings' %}" class="admin-option">MANAGE BOOKINGS</a>
+        <a href="{% url 'about' %}" class="admin-option">ABOUT US</a>
+    </div>
+</div>
+
+{% endblock content %}

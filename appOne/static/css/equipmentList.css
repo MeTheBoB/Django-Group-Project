@@ -1,37 +1,56 @@
-
-.table_with_equipment {
-    margin-top: 30px;
-    padding: 0 60px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 30px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-
-}
-
-th {
-    background-color: #f2f2f2;
-    color: black;
-}
-
-tr:nth-child(even) {background-color: #f9f9f9;}
-
-img {
-    width: 50px;
+.equipment-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* This will spread out the equipment boxes */
+    gap: 20px; /* This adds space between the boxes */
+  }
+  
+  .equipment-item {
+    border: 1px solid #ddd; /* Adds a border to each equipment item */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Adds a shadow for depth */
+    width: 250px; /* Or whatever fixed width you prefer */
+    margin-bottom: 20px; /* Space below each item */
+    background: #fff; /* Background color for each item */
+  }
+  
+  .equipment-image img {
+    width: 100%; /* Makes the image take up the entire width of the box */
     height: auto;
+    display: block; /* Ensures no extra space around the image */
+  }
+  
+  .equipment-details {
+    padding: 10px;
+  }
+  
+  .equipment-actions {
+    padding: 10px;
+    background: #f7f7f7; /* Slightly different background for the action area */
+    text-align: center; /* Centers the action buttons */
+  }
+  
+  .edit-button {
+    background-color: #007bff; /* Example button color */
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+  }
+  @media screen and (max-width: 992px) {
+    /* For tablets and below, we go for two items per row */
+    .equipment-item {
+        width: calc(50% - 20px); /* Two items per row with gap */
+    }
 }
 
-form {
-    margin-bottom: 20px;
-}
-.form_ {
-    margin-top: 100px;
+@media screen and (max-width: 768px) {
+    /* For mobile devices, we want a single column layout */
+    .equipment-item {
+        width: 100%; /* Full width items */
+    }
 }

@@ -16,7 +16,12 @@
     <!-- Navigation links -->
     <div class="nav-links">
         <!-- Common link for both admin and regular users -->
-        <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+        {% if request.user.is_staff %}
+        <a href="{% url 'admin_home' %}" class="{% if request.resolver_match.url_name == 'admin_home' %}active{% endif %}">Home</a>
+        {% else %}
+        <a href="{% url 'user_home' %}" class="{% if request.resolver_match.url_name == 'user_home' %}active{% endif %}">Home</a>
+        {% endif %}        
+        
         <a href="{% url 'equipment_list' %}" class="{% if request.resolver_match.url_name == 'equipment_list' %}active{% endif %}">Equipment List</a>
         
         {% if request.user.is_staff %}

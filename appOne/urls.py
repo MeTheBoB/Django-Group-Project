@@ -32,4 +32,12 @@ urlpatterns = [
     path('user/orders/', views.user_orders, name='user_orders'),
     path('cancel-reservation/<int:reservation_id>/', views.cancel_reservation, name='cancel_reservation'),
 
+    #johan
+    path('admin_home/', views.admin_home, name='admin_home'),
+    path('user_home/', views.user_home, name='user_home'),
+    path('management/', views.management_view, name='management'),
+    path('manage-booking/', views.manage_booking_view, name='manage_booking'),
+    path('reports/', views.reports_view, name='reports'),
+    path('about/', views.about_view, name='about'),
+
 ]
