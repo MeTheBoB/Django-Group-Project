@@ -38,6 +38,8 @@ def contactUsPage(request):
 
 
 #Equipment handling
+
+# Created by saad and html Johan
 @login_required
 def equipmentList(request):
     form = EquipmentFilterForm(request.GET or None)
@@ -57,6 +59,8 @@ def equipmentList(request):
         'equipments': equipments
     })
 
+
+#Created by saad
 @user_passes_test(admin_check)
 def equipment_add(request):
     if request.method == 'POST':
@@ -73,6 +77,7 @@ def equipment_add(request):
 
     return render(request, 'appOne/equipment_form.html', {'form': form, 'equipment': None})
 
+#Created by saad
 @user_passes_test(admin_check)
 def equipment_edit(request, equipment_id):
     equipment = get_object_or_404(Equipment, pk=equipment_id)
@@ -85,6 +90,7 @@ def equipment_edit(request, equipment_id):
         form = EquipmentForm(instance=equipment)
     return render(request, 'appOne/equipment_form.html', {'form': form, 'equipment': equipment})
 
+#Created by saad
 @user_passes_test(admin_check)
 def equipment_delete(request, equipment_id):
     equipment = get_object_or_404(Equipment, pk=equipment_id)
@@ -92,6 +98,8 @@ def equipment_delete(request, equipment_id):
     messages.success(request, "Equipment successfully deleted!")
     return redirect('equipment_list')
 
+
+#Created by saad sharo did html
 @login_required
 def equipment_detail(request, pk):
     equipment = get_object_or_404(Equipment, pk=pk)
@@ -120,6 +128,7 @@ def equipment_detail(request, pk):
 
 
 #User Registering and login views
+#Created by saad
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -136,6 +145,7 @@ def register(request):
 
 
 #Cart handlings
+#Created by saad
 @login_required
 def view_cart(request):
     cart = request.session.get('cart', {})
@@ -160,7 +170,7 @@ def view_cart(request):
     return render(request, 'appOne/cart.html', {'cart_items': cart_items})
 
 
-
+#Created by saad
 def add_to_cart(request, pk):
     if request.method == 'POST':
         try:
@@ -190,7 +200,7 @@ def add_to_cart(request, pk):
             messages.error(request, 'This item does not exist.')
             return redirect('equipment_list')
 
-
+#Created by saad
 def remove_from_cart(request, pk):
     cart = request.session.get('cart', {})
 
@@ -203,7 +213,7 @@ def remove_from_cart(request, pk):
 
     return redirect('view_cart')
 
-
+#Created by saad
 @login_required
 def update_cart_item(request, pk):
     if request.method == 'POST':
@@ -222,8 +232,8 @@ def update_cart_item(request, pk):
         return redirect('view_cart')
 
 
-
 #equipment booking handling
+#Created by saad
 @login_required
 def equipment_reserve(request, pk):
     equipment = get_object_or_404(Equipment, pk=equipment_id)
@@ -243,7 +253,7 @@ def equipment_reserve(request, pk):
         return render(request, 'appOne/equipment_detail.html', {'equipment': equipment, 'form': form})
 
 
-
+#Created by saad
 @login_required
 def place_booking(request):
     if request.method == 'POST':
@@ -274,7 +284,7 @@ def place_booking(request):
 
 
 #user order management (user) handling
-
+#Created by saad
 @login_required
 def user_orders(request):
     user_reservations = Reservation.objects.filter(user=request.user)
@@ -289,7 +299,7 @@ def user_orders(request):
         'reservations': user_reservations
     }
     return render(request, 'user/user_orders.html', context)
-
+#Created by saad
 @login_required
 def cancel_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
