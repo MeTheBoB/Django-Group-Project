@@ -1,0 +1,23 @@
+<!-- templates/user_home.html -->
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+{% include 'navbar.html' %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<div class="user-home-content">
+    <div class="user-home-header">
+        <h1>USER HOME PAGE</h1>
+        <a href="{% url 'logout' %}" class="logout-button">Log out</a>
+    </div>
+    <div class="user-home-options">
+        <a href="{% url 'my_account' %}" class="user-option">MY ACCOUNT PAGE</a>
+        <a href="{% url 'equipment_list' %}" class="user-option">EQUIPMENT'S LISTS PAGE</a>
+        <a href="{% url 'help_support' %}" class="user-option">HELP & SUPPORT</a>
+        <a href="{% url 'about' %}" class="user-option">ABOUT US</a>
+    </div>
+</div>
+
+{% endblock content %}

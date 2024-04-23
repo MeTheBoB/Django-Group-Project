@@ -1,0 +1,47 @@
+/* static/css/home.css */
+
+/* Common styles for both user and admin home pages */
+.home-content {
+    background-color: #FFFDD0; /* Cream background color */
+    padding: 20px;
+}
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logout-button {
+    background-color: #D9534F;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #C9302C;
+}
+
+.home-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.user-option, .admin-option {
+    display: block;
+    background-color: #017BFE;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.user-option:hover, .admin-option:hover {
+    background-color: #0056b3;
+}
