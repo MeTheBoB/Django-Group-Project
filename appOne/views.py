@@ -318,3 +318,49 @@ def cancel_reservation(request, reservation_id):
         messages.error(request, "You cannot cancel this reservation as it is either approved or overdue.")
 
     return redirect('user_orders')
+
+#Show all users to admin
+#created by Leandro
+@user_passes_test(admin_check)
+def list_users(request):
+    users = User.objects.all()
+    return render(request, 'appOne/user_list.html', {'users': users})
+
+#Admin funtion to edit user's details
+#created by Leandro
+@user_passes_test(admin_check)
+def add_user(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, f'New user {user.username} added successfully!')
+            return redirect('list_users')
+    else:
+        form = SignUpForm()
+    return render(request, 'user/add_user.html', {'form': form})
+
+#Admin funtion to delete a user
+#created by Leandro
+@user_passes_test(admin_check)
+def delete_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    user.delete()
+    messages.success(request, "User deleted successfully.")
+    return redirect('list_users')
+
+
+#Admin funtion to approve new bookings
+#created by Leandro
+@user_passes_test(admin_check)
+def authorize_reservations(request):
+    pending_reservations = Reservation.objects.filter(status='pending')
+    if request.method == 'POST':
+        reservation_id = request.POST.get('reservation_id')
+        reservation = get_object_or_404(Reservation, pk=reservation_id)
+        reservation.status = 'approved'
+        reservation.save()
+        messages.success(request, "Reservation approved successfully.")
+        return redirect('authorize_reservations')
+    return render(request, 'appOne/authorize_reservations.html', {'reservations': pending_reservations})
+
