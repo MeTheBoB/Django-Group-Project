@@ -33,6 +33,7 @@ urlpatterns = [
     path('cancel-reservation/<int:reservation_id>/', views.cancel_reservation, name='cancel_reservation'),
 
     #johan
+    # home page already exists
     path('admin_home/', views.admin_home, name='admin_home'),
     path('user_home/', views.user_home, name='user_home'),
     path('management/', views.management_view, name='management'),
