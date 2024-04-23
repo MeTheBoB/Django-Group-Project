@@ -86,3 +86,39 @@ class ReservationForm(forms.ModelForm):
             'booking_start_date': forms.DateInput(attrs={'type': 'date'}),
             'booking_end_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+#admin funtion form
+#created by Leandro
+class UserEditForm(forms.ModelForm):
+    name = forms.CharField(max_length=30)
+    surname = forms.CharField(max_length=30)
+    date_of_birth = forms.DateField(help_text='Format: YYYY-MM-DD')
+    email = forms.EmailField()
+    phone_number = forms.CharField(max_length=17)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'name', 'surname', 'date_of_birth', 'phone_number']
+
+    def save(self, commit=True):
+        user = super(UserEditForm, self).save(commit=False)
+        user.first_name = self.cleaned_data['name']
+        user.last_name = self.cleaned_data['surname']
+        user.email = self.cleaned_data['email']
+        user.date_of_birth = self.cleaned_data['date_of_birth']
+        user.phone_number = self.cleaned_data['phone_number']
+
+        if commit:
+            user.save()
+            # Atualizar também a instância Person relacionada se necessário
+            person, created = Person.objects.update_or_create(
+                user=user,
+                defaults={
+                    'name': user.first_name,
+                    'surname': user.last_name,
+                    'date_of_birth': user.date_of_birth,
+                    'email': user.email,
+                    'phone_number': user.phone_number
+                }
+            )
+        return user
