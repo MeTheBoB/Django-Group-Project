@@ -13,32 +13,33 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.timezone import now
 
-
+# Function to check if as user is an admin
 def admin_check(user):
     return user.is_authenticated and user.is_staff
-
+# Function to check if a user is not authenticated
 def is_not_authenticated(user):
     return not user.is_authenticated
 
+# View to render the welcome page for unauthenticated users
 @user_passes_test(is_not_authenticated, login_url='homepage', redirect_field_name=None)
 def welcomePage(request):
     return render(request, "appOne/welcomePage.html")
 
 
-def index(request):
-    return HttpResponse(request, {'testdata':testdata})
 
+# View to render the homepage for logged-in users
 @login_required
 def homePage(request):
     return render(request, "appOne/home.html")
 
+# View to render the contact page for logged-in users
 @login_required
 def contactUsPage(request):
     return render(request, "appOne/contactus.html")
 
 
 #Equipment handling
-
+# View to display a list of equipment, with filtering options
 # Created by saad and html Johan
 @login_required
 def equipmentList(request):
@@ -61,6 +62,7 @@ def equipmentList(request):
 
 
 #Created by saad
+# View to add new equipment to the list (for admins only)
 @user_passes_test(admin_check)
 def equipment_add(request):
     if request.method == 'POST':
@@ -78,6 +80,7 @@ def equipment_add(request):
     return render(request, 'appOne/equipment_form.html', {'form': form, 'equipment': None})
 
 #Created by saad
+# View to edit existing equipment (for admins only)
 @user_passes_test(admin_check)
 def equipment_edit(request, equipment_id):
     equipment = get_object_or_404(Equipment, pk=equipment_id)
@@ -91,6 +94,7 @@ def equipment_edit(request, equipment_id):
     return render(request, 'appOne/equipment_form.html', {'form': form, 'equipment': equipment})
 
 #Created by saad
+# View to delete equipment (for admins only)
 @user_passes_test(admin_check)
 def equipment_delete(request, equipment_id):
     equipment = get_object_or_404(Equipment, pk=equipment_id)
@@ -100,6 +104,7 @@ def equipment_delete(request, equipment_id):
 
 
 #Created by saad sharo did html
+# View to display details of a specific piece of equipment
 @login_required
 def equipment_detail(request, pk):
     equipment = get_object_or_404(Equipment, pk=pk)
