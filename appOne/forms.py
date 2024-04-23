@@ -8,6 +8,7 @@ from .models import *
 
 
 # To filter the equipment
+# created by Saad
 class EquipmentFilterForm(forms.ModelForm):
     equipment_id = forms.IntegerField(required=False)
     type_of_device = forms.CharField(required=False)
@@ -17,6 +18,7 @@ class EquipmentFilterForm(forms.ModelForm):
 
 
 # To add equipment
+# created by Saad
 class EquipmentForm(forms.ModelForm):
     class Meta:
         model = Equipment
@@ -39,6 +41,7 @@ class EquipmentForm(forms.ModelForm):
 
 
 #User Registering and login form
+# Created Saad
 class SignUpForm(UserCreationForm):
     name = forms.CharField(max_length=30)
     surname = forms.CharField(max_length=30)
@@ -74,7 +77,7 @@ class SignUpForm(UserCreationForm):
 
 
 #reservation
-
+# Created by Saad
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
