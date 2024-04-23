@@ -6,6 +6,8 @@ from appOne.forms import EquipmentFilterForm
 
 
 urlpatterns = [
+
+# created by Saad
     path("", views.welcomePage, name="welcomepage"),
     path('homePage/', views.homePage, name="homepage"),
     path("contact-us/", views.contactUsPage, name="contact_us"),
