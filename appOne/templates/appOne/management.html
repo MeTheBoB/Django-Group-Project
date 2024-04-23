@@ -1,11 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>leandro</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<section>
+    <h2>Add New User</h2>
+    <form method="post" action="{% url 'add_user' %}">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</section>
+
+<section>
+    <h2>User List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.person.name }} {{ user.person.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.person.date_of_birth }}</td>
+                <td>
+                    <a href="{% url 'edit_user' user.id %}">Edit</a>
+                    <a href="{% url 'delete_user' user.id %}" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Authorize Reservations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Equipment</th>
+                <th>User</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.equipment.device_name }}</td>
+                <td>{{ reservation.user.username }}</td>
+                <td>{{ reservation.booking_start_date }}</td>
+                <td>{{ reservation.booking_end_date }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>
+                    <form method="post" action="{% url 'authorize_reservation' reservation.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
