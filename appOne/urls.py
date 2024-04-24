@@ -8,7 +8,7 @@ from appOne.forms import EquipmentFilterForm
 urlpatterns = [
 
 # created by Saad
-    path("", views.welcomePage, name="welcomepage"),
+    path('', views.welcomePage, name="welcomepage"),
     path('homePage/', views.homePage, name="homepage"),
     path("contact-us/", views.contactUsPage, name="contact_us"),
     path('equipment-list/', views.equipmentList, name='equipment_list'),
@@ -39,5 +39,5 @@ urlpatterns = [
     path('manage-booking/', views.manage_booking_view, name='manage_booking'),
     path('reports/', views.reports_view, name='reports'),
     path('about/', views.about_view, name='about'),
-
+    
 ]

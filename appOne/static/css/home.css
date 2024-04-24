@@ -45,3 +45,19 @@
 .user-option:hover, .admin-option:hover {
     background-color: #0056b3;
 }
+
+.logo {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 100px; /* Set the width to your preference */
+    height: auto; /* Keep the height proportional */
+    z-index: 1000; /* Keeps the logo on top */
+  }
+  @media screen and (max-width: 768px) {
+    .logo {
+      width: 80px; /* Smaller logo on mobile devices */
+      /* Other styles remain the same */
+    }
+  }
+  

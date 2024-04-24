@@ -1,27 +1,24 @@
+<!--Johan created-->
 {% extends 'main.html' %}
 
 {% block content %}
 {% load static %}
-<head>
-  <meta charset="utf-8">
-  <title>Welcome</title>
-  <link rel="stylesheet" href="{% static 'css/welcomepagecss.css' %}">
-</head>
+<link rel="stylesheet" href="{% static 'css/welcomepagecss.css' %}">
 
-<body>
-  <div class="welcomepage-container">
-    <div class="welcomepage-image">
-      <img src="{% static 'images/wlcSchoolInv.png' %}" alt="Welcome to School Inventory" width="500" height="600">
+<div class="welcomepage-wrapper">
+    <div class="welcomepage-left">
+        <!-- The background image is set in the CSS, so no need for an img tag here -->
+        <div class="welcome-overlay">
+            <h1 class="welcome-message">Welcome to School Inventory</h1>
+        </div>
     </div>
-
-    <div class="welcomepage-buttons">
-      <a href="{% url 'login' %}" class="button2">Login</a> <!-- Assuming 'login' is the URL name for your login view -->
-      <a href="{% url 'login' %}" class="button2">Admin</a> <!-- Adjust accordingly if you have a specific admin login or dashboard -->
-
-      <p>Don't have an account (user)? <a href="{% url 'register' %}">click here</a></p>
-      <p>Do you need any help?</p>
-      <p>Contact <a href="">Us</a></p>
+    <div class="welcomepage-right">
+        <!-- buttons and links -->
+        <a href="{% url 'login' %}" class="button">USER</a>
+        <a href="{% url 'login' %}" class="button">ADMIN</a>
+        <p>Don't have an account? <a href="{% url 'register' %}">Click here</a></p>
+        <p>Do you need any help? <a href="#">Contact us!</a></p>
     </div>
-  </div>
-</body>
+</div>
+
 {% endblock %}

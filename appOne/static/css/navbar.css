@@ -49,3 +49,19 @@
 .btn:hover {
     background-color: #0a7bcc;
 }
+/* Logo should be outside the main content and on the right side corner */
+.logo {
+    position: right;
+    right: 10px;
+    top: 10px;
+    width: 30px; /* Set the width to your preference */
+    height: auto; /* Keep the height proportional */
+    z-index: 10; /* Keeps the logo on top */
+  }
+@media screen and (max-width: 768px) {
+    .logo {
+      width: 80px; /* Smaller logo on mobile devices */
+      /* Other styles remain the same */
+    }
+  }
+  

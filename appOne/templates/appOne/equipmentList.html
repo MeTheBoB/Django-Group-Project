@@ -8,19 +8,24 @@
 <link rel="stylesheet" href="{% static 'css/equipmentList.css' %}">
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 <link rel="stylesheet" href="{% static 'css/top-panel.css' %}">
+<img src="{% static 'images/logo.jpg' %}" alt="Logo" class="logo">
+
 <!-- Include the navigation sidebar -->
 {% include 'appOne/sidebar.html' %}
 
-<div class="content">
-    <h1>EQUIPMENT LISTS</h1>
 
     <!-- Actions for search, filter, sort -->
-    <div class="equipment-actions-top">
-        <input type="text" id="searchEquipment" placeholder="Search for equipment...">
-        <button onclick="filterSortFunction()">FILTER/SORT</button>
-        {% if request.user.is_staff %}
-            <a class="action-button" href="{% url 'equipment_add' %}">Add Equipment</a>
-        {% endif %}
+    <!-- Main content -->
+    <div class="main-content">
+        <div class="header-actions">
+        <h1>EQUIPMENT LISTS</h1>
+        <div class="search-filter">
+            <input type="text" id="searchEquipment" placeholder="Search for equipments...">
+            <button onclick="filterSortFunction()">FILTER/SORT</button>
+            {% if request.user.is_staff %}
+                <a class="action-button" href="{% url 'equipment_add' %}">Add Equipment</a>
+            {% endif %}
+        </div>
     </div>
 
     <!-- List of equipment -->
