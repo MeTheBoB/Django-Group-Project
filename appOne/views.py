@@ -388,3 +388,6 @@ def about_view(request):
 def equipment_list(request):
     equipment_list = Equipment.objects.all()
     return render(request, 'appOne/equipment_list.html', {'equipment_list': equipment_list})
+
+def welcomePage(request):
+    return render(request, "appOne/welcomePage.html")

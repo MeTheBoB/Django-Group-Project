@@ -5,15 +5,17 @@
 
 
 <!-- Created by saad -->
-<body>
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 
-  <form method="post">
+<div class="login-container">
+  <h2>Login Here</h2>
+  <form method="post"class="login-form">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="hidden" name="next" value="{% url 'homepage' %}">
-      <button type="submit">Login</button>
+      <button type="submit" class="login-button">Login</button>
   </form>
 
-  </body>
+</div>
 
 {% endblock content %}

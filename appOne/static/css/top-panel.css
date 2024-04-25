@@ -8,15 +8,6 @@
     padding: 10px 20px;
   }
   
-  .top-panel .logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .top-panel .logo img {
-    margin-right: 10px; /* Adjust the margin as needed */
-  }
-  
   .top-panel .account-info {
     display: flex;
     align-items: center;

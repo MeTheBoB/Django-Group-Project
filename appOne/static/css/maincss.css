@@ -2,11 +2,20 @@ body{
     background-color: rgb(245, 239, 188);
 }
 
-
+/* Logo positioned in the top right corner, with adjusted size for professionalism */
 .logo {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
+  position: fixed; /* Fixed position relative to the viewport */
+  right: 10px; /* 20 pixels from the right edge of the viewport */
+  top: 10px; /* 20 pixels from the top edge of the viewport */
+  width: 80px; /* Adjusted width for a smaller logo */
+  height: auto; /* Height will adjust automatically to maintain the aspect ratio */
+  z-index: 1000; /* High z-index to ensure the logo is above other elements */
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 60px; /* Even smaller logo size for mobile devices */
+    top: 10px; /* Less spacing from the top to adjust for mobile view */
+    right: 10px; /* Less spacing from the right to adjust for mobile view */
+  }
 }

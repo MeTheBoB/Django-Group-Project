@@ -1,40 +1,83 @@
-.welcomepage-container {
+/*johan created*/
+.welcomepage-wrapper {
   display: flex;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.welcomepage-left {
+  flex: 1; /* This will allow the left side to fill the space */
+  background: url('../images/frontpage.jpg') no-repeat center center;
+  background-size: cover; /* Cover the full area of the div */
+  position: relative; /* For absolute positioning of the welcome message */
+}
+
+.welcome-overlay {
+  position: absolute;
+  top: 50%; /* Adjust this as needed to position over the notepad */
+  left: 50%; /* Adjust this as needed to position over the notepad */
+  transform: translate(-50%, -50%); /* Centers the overlay */
+  padding: 1em;
+  border-radius: 10px; /* Optional: if you want rounded corners */
+}
+
+.welcome-message {
+  font-size: 100px; /* Adjust as needed for your design */
+  text-align: center;
+  color: #000; /* Text color */
+  margin: 0;
+}
+
+.welcomepage-right {
+  flex-basis: 40%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
-.welcomepage-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.welcomepage-image {
-  margin-bottom: 20px;
-  
-}
-
-.welcomepage-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-
-.button2 {
-  background-color: #ddd;
+.button {
+  background-color: #ffffff; /* Light background */
+  color: #007bff; /* Button text color */
   margin-bottom: 10px;
-  margin-left: 30px;
-  border-radius: 8px;
-  width: 120px;
-  height: 70px;
-  border: none;
-  cursor: pointer;
+  padding: 15px 30px; /* More padding for a larger button */
+  border: 2px solid #007bff; /* Border color same as text to stand out */
+  border-radius: 30px; /* Rounded borders */
+  text-align: center;
+  display: block;
+  width: auto;
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* UPPERCASE letters */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
-.button2:hover {
-  background-color: #008CBA;
-  color: black;
+.button:hover {
+  background-color: #007bff; /* Background color on hover */
+  color: #ffffff; /* Text color on hover */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5); /* Shadow effect on hover */
+}
+/* New styles for account and contact links */
+.account-contact-links {
+  text-align: center; /* Center align the text */
+  margin: 20px 0; /* Add some vertical margin */
+}
+
+.account-contact-links a {
+  color: #0066CC; /* A pleasant shade of blue for links */
+  text-decoration: none; /* Remove underline from links */
+  padding: 5px 10px; /* Add some padding */
+  border: 1px solid #0066CC; /* Add a border to the links */
+  border-radius: 5px; /* Rounded corners for the links */
+  transition: background-color 0.3s, color 0.3s; /* Smooth color transition for hover effect */
+}
+
+.account-contact-links a:hover {
+  background-color: #0066CC; /* Change background on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+/* Optional: You can add some space between the links for better separation */
+.account-contact-links p + p {
+  margin-top: 10px;
 }
