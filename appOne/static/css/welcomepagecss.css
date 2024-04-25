@@ -36,17 +36,24 @@
 }
 
 .button {
-  background-color: #ddd;
+  background-color: #ffffff; /* Light background */
+  color: #007bff; /* Button text color */
   margin-bottom: 10px;
-  padding: 10px 20px; /* Adjust padding as needed */
-  border-radius: 8px;
+  padding: 15px 30px; /* More padding for a larger button */
+  border: 2px solid #007bff; /* Border color same as text to stand out */
+  border-radius: 30px; /* Rounded borders */
   text-align: center;
   display: block;
-  width: auto; /* It will be as wide as its content plus padding */
-  
+  width: auto;
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* UPPERCASE letters */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
 .button:hover {
-  background-color: #008CBA;
-  color: white;
+  background-color: #007bff; /* Background color on hover */
+  color: #ffffff; /* Text color on hover */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5); /* Shadow effect on hover */
 }
+
