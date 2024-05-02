@@ -1,77 +1,95 @@
-<!-- equipment_list.html -->
-
 {% extends "main.html" %}
-
 {% block content %}
-
 {% load static %}
 
-{% include 'navbar.html'%}
-{% include 'sidebar.html'%}
+<!--Created by Johan Ahmed Chowdhury-->
 
-<link rel="stylesheet" href="{%  static 'css/equipmentList.css'%}">
+<link rel="stylesheet" href="{% static 'css/equipmentList.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+<link rel="stylesheet" href="{% static 'css/top-panel.css' %}">
+<script src="{% static 'js/top-panel.js' %}" type="text/javascript"></script>
+
+{% include 'appOne/sidebar.html' %}
+{% include 'appOne/top-panel.html' %}
 
 
+    <!-- Main content -->
+    <div class="main-content">
+        <div class="header-actions">
+        <h1>EQUIPMENTs LIST</h1>
+        <div class="search-filter-sort">
+            <!-- Existing Search Form -->
+            <form action="{% url 'equipment_list' %}" method="get" class="search-form">
+                <input type="text" name="search_term" id="searchEquipment" placeholder="Search for equipments..." value="{{ request.GET.search_term }}">
+                <button type="submit">Search</button>
+            </form>
 
-<div class="table_with_equipment">
-    <div class="form_">
-        <!-- Search Form -->
-        <form method="get" action="{% url 'equipment_list' %}">
-            {% csrf_token %}
-            <div class="field-container">
-                {{ filter_form.equipment_id.label_tag }}
-                {{ filter_form.equipment_id }}
-            </div>
-            <div class="field-container">
-                {{ filter_form.type_of_device.label_tag }}
-                {{ filter_form.type_of_device }}
-            </div>
-            <button type="submit" class="btn">Search</button>
-            {% if user.is_staff %}
-            <a href="{% url 'equipment_add' %}" class="btn">Add Equipment</a>
+            {% if request.user.is_staff %}
+                <a class="action-button" href="{% url 'equipment_add' %}">Add Equipment</a>
             {% endif %}
-        </form>
+        </div>
+
+            <!-- Filter and Sort Form -->
+            <form action="{% url 'equipment_list' %}" method="get" class="filter-sort-form">
+                <!-- Include search term in filter/sort to preserve search across filters/sorts -->
+                <input type="hidden" name="search_term" value="{{ request.GET.search_term }}">
+
+                <!-- Onsite Filter -->
+                <select name="onsite">
+                    <option value="">Select Onsite/Offsite</option>
+                    <option value="True">Onsite</option>
+                    <option value="False">Offsite</option>
+                </select>
+
+                <!-- Type of Device Filter -->
+                <select name="type_of_device">
+                    <option value="">Select Type</option>
+                    <option value="Camera/Sensors">Camera/Sensors</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="PC Peripherals">PC Peripherals</option>
+                    <option value="PC/Laptop">PC/Laptop</option>
+                    <option value="Phones/ Tablet">Phones/ Tablet</option>
+                    <option value="Tripod">Tripod</option>
+                    <option value="VR Controller">VR Controller</option>
+                    <option value="VR Headset">VR Headset</option>
+                    <option value="Other">Other</option>
+                    <!-- Add other types as needed -->
+                </select>
+
+                <!-- Sorting -->
+                <select name="sort_by">
+                    <option value="">Sort By</option>
+                    <option value="a_to_z">A to Z</option>
+                    <option value="z_to_a">Z to A</option>
+                </select>
+
+                <!-- Apply Button -->
+                <button type="submit">Apply</button>
+            </form>
+
     </div>
 
-    <!-- Equipment Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>Equipment ID</th>
-                <th>Type of Device</th>
-                <th>Image</th>
-                <th>Device Name</th>
-                <th>Location</th>
-                <th>Comments</th>
-                <th>Onsite</th>
-                <th>Availability</th>
-                {% if user.is_staff %}
-                <th>Action</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for equipment in equipments %}
-            <tr>
-                <td>{{ equipment.id }}</td>
-                <td>{{ equipment.type_of_device }}</td>
-                <td><img src="{{ equipment.image.url }}" alt="Equipment Image" style="width:50px;height:50px;"></td>
-                <td>{{ equipment.device_name }}</td>
-                <td>{{ equipment.location }}</td>
-                <td>{{ equipment.comments }}</td>
-                <td>{{ equipment.onsite }}</td>
-                <td>{{ equipment.availability }}</td>
-                <td><a href="{% url 'equipment_detail' pk=equipment.id %}" class="btn detail-btn">Details</a></td>
-                {% if user.is_staff %}
-                <td><a href="{% url 'equipment_edit' equipment_id=equipment.id %}">Edit</a></td>
-                {% endif %}
-            </tr>
-            {% empty %}
-            <tr><td colspan="9">No equipment found.</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- List of equipment -->
+    <div class="equipment-container">
+      {% for equipment in equipment_list %}
+            <div class="equipment-item">
+                <div class="equipment-image">
+                  <img src="{{ equipment.image.url }}" alt="{{ equipment.device_name }}">
+            </div>
+            <div class="equipment-details">
+                <h2>{{ equipment.device_name }}</h2>
+                <p>ID: {{ equipment.id }}</p>
+                </div>
+                <div class="equipment-actions">
+                    {% if request.user.is_staff %}
+                        <a class="edit-button" href="{% url 'equipment_edit' equipment.id %}">Edit</a>
+                    {% else %}
+                        <a class="view-button" href="{% url 'equipment_detail' equipment.id %}">View Details</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
-
-{% endblock content %}
+{% endblock %}
